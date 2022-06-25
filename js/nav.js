@@ -49,7 +49,13 @@ async function navFavoritesClick(evt) {
   console.debug("navFavoritesClick", evt);
   await checkForRememberedUser();
   hidePageComponents();
+  $favStoriesList.show();
+  $noFavoritesMsg.show();
+  // if (currentUser.favorites.length == 0) {
+  //   $noFavoritesMsg.show();
+  // }
   putFavStoriesOnPage();
+  stayCheckedIfFav();
 }
 
 $navFavorites.on("click", navFavoritesClick);

@@ -87,10 +87,7 @@ $submitForm.on("submit", submitAndAddStory);
 
 $("body").on("click", ":checkbox", function (evt) {
   if (this.checked) {
-    // addToFavorites(currentUser, evt.target.parentElement.id);
-    console.log("checked");
-    console.log(this.parentElement.id);
-    console.log(evt.target.parentElement.id);
+    currentUser.addToFavorites(currentUser, evt.target.parentElement.id);
   } else {
     console.log("unchecked");
   }
@@ -100,13 +97,33 @@ $("body").on("click", ":checkbox", function (evt) {
 function putFavStoriesOnPage() {
   console.debug("putStoriesOnPage");
 
-  $favStoriesList.empty();
+  if (currentUser.favorites.length !== 0) {
+    $favStoriesList.empty();
 
-  // loop through all of our stories and generate HTML for them
+    // loop through all of our stories and generate HTML for them
+    for (let story of currentUser.favorites) {
+      const $story = generateStoryMarkup(story);
+      $favStoriesList.append($story);
+    }
+    $favStoriesList.show();
+  }
+}
+
+function stayCheckedIfFav() {
+  $("#fav-stories-list li :checkbox").attr("checked", true);
+}
+
+function favCheck() {
+  const favListArray = [];
+  undefined;
   for (let story of currentUser.favorites) {
-    const $story = generateStoryMarkup(story);
-    $favStoriesList.append($story);
+    favListArray.push(story.storyId);
   }
 
-  $favStoriesList.show();
+  const ul = $("li");
+  for (let li of ul) {
+    if (favListArray.includes(li.id)) {
+      li.children[0].checked = true;
+    }
+  }
 }

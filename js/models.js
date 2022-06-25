@@ -203,14 +203,13 @@ class User {
       { token: currentUser.loginToken }
     );
     currentUser.favorites.push(res.data.user.favorites);
-    return new Story(res.data.user.favorites);
   }
 
   /** deletes stories from favorite list */
-  // static async deleteFavorites(user, storyId) {
+  // async deleteFavorites(currentUser, storyId) {
   //   const res = axios.post(
-  //     `https://hack-or-snooze-v3.herokuapp.com/users/${user.username}/favorites/${storyId}`,
-  //     { token: user.loginToken }
+  //     `https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${storyId}`,
+  //     { token: currentUser.loginToken }
   //   );
   //   currentUser.favorites.push(res.data.user.favorites);
   // }

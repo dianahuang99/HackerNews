@@ -5,6 +5,8 @@
 const $body = $("body");
 
 const $storiesLoadingMsg = $("#stories-loading-msg");
+const $noFavoritesMsg = $("#no-favorites-msg");
+
 const $allStoriesList = $("#all-stories-list");
 const $favStoriesList = $("#fav-stories-list");
 
@@ -45,6 +47,8 @@ async function start() {
 
   // if we got a logged-in user
   if (currentUser) updateUIOnUserLogin();
+
+  favCheck();
 }
 
 // Once the DOM is entirely loaded, begin the app
