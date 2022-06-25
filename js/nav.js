@@ -39,6 +39,17 @@ function updateNavOnLogin() {
 function navSubmitClick(evt) {
   console.debug("navSubmitClick", evt);
   $submitForm.show();
+  $favStoriesList.hide();
+  start();
 }
 
 $navSubmit.on("click", navSubmitClick);
+
+async function navFavoritesClick(evt) {
+  console.debug("navFavoritesClick", evt);
+  await checkForRememberedUser();
+  hidePageComponents();
+  putFavStoriesOnPage();
+}
+
+$navFavorites.on("click", navFavoritesClick);

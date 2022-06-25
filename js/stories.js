@@ -2,6 +2,7 @@
 
 // This is the global list of the stories, an instance of StoryList
 let storyList;
+let favList;
 
 /** Get and show stories when site first loads. */
 
@@ -20,11 +21,12 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
+  console.debug("generateStoryMarkup", story);
 
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+        <input type="checkbox">
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -71,6 +73,40 @@ async function submitAndAddStory(evt) {
 
 $submitForm.on("submit", submitAndAddStory);
 
-$("body").on("click", function (evt) {
-  console.log(evt.target.id);
+//ask when to use change and when to use click
+// $(":checkbox").on("change", function (evt) {
+//   if (evt.target.checked) {
+//     // addToFavorites(currentUser, evt.target.parentElement.id);
+//     console.log("checked");
+//     console.log(this);
+//     console.log(evt.target);
+//   } else {
+//     console.log("unchecked");
+//   }
+// });
+
+$("body").on("click", ":checkbox", function (evt) {
+  if (this.checked) {
+    // addToFavorites(currentUser, evt.target.parentElement.id);
+    console.log("checked");
+    console.log(this.parentElement.id);
+    console.log(evt.target.parentElement.id);
+  } else {
+    console.log("unchecked");
+  }
 });
+
+//puts fav stories in html
+function putFavStoriesOnPage() {
+  console.debug("putStoriesOnPage");
+
+  $favStoriesList.empty();
+
+  // loop through all of our stories and generate HTML for them
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $favStoriesList.append($story);
+  }
+
+  $favStoriesList.show();
+}
