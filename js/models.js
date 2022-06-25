@@ -73,6 +73,15 @@ class StoryList {
 
   async addStory(user, newStory) {
     // UNIMPLEMENTED: complete this function!
+    const res = axios.post(
+      "https://hack-or-snooze-v3.herokuapp.com/stories",
+
+      {
+        token: user.loginToken,
+        story: { ...newStory },
+      }
+    );
+    return new Story(res);
   }
 }
 
@@ -185,5 +194,14 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
+  }
+
+  /** Adds stories to favorite list */
+  static async addToFavorites(user, storyId) {
+    const res = axios.post(
+      `https://hack-or-snooze-v3.herokuapp.com/users/${user.username}/favorites/${storyId}`,
+      { token: user.loginToken }
+    );
+    return res;
   }
 }

@@ -50,3 +50,27 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+async function submitAndAddStory(evt) {
+  console.debug("submitStory", evt);
+  evt.preventDefault();
+
+  // grab the author, title, and url
+  const author = $("#submit-author").val();
+  const title = $("#submit-title").val();
+  const url = $("#submit-url").val();
+
+  //add the story to api
+  storyList.addStory(currentUser, { title, author, url });
+  $submitForm.trigger("reset");
+  $submitForm.hide();
+
+  //reset the story list so the new story shows up in html
+  start();
+}
+
+$submitForm.on("submit", submitAndAddStory);
+
+$("body").on("click", function (evt) {
+  console.log(evt.target.id);
+});
