@@ -88,7 +88,8 @@ $("body").on("click", ":checkbox", function (evt) {
   if (this.checked) {
     currentUser.addToFavorites(currentUser, evt.target.parentElement.id);
   } else {
-    console.log("unchecked");
+    console.log(evt.target.parentElement.id);
+    currentUser.deleteFavorites(currentUser, evt.target.parentElement.id);
   }
 });
 

@@ -202,25 +202,15 @@ class User {
       `https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${storyId}`,
       { token: currentUser.loginToken }
     );
-    currentUser.favorites.push(res.data.user.favorites);
+    // currentUser.favorites.push(res.data.user.favorites);
   }
 
   /** deletes stories from favorite list */
-  // async deleteFavorites(currentUser, storyId) {
-  //   const res = axios.post(
-  //     `https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${storyId}`,
-  //     { token: currentUser.loginToken }
-  //   );
-  //   currentUser.favorites.push(res.data.user.favorites);
-  // }
+  async deleteFavorites(currentUser, storyId) {
+    const token = currentUser.loginToken;
+    const res = await axios.delete(
+      `https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${storyId}`,
+      { params: { token } }
+    );
+  }
 }
-
-// $(function () {
-//   var test = localStorage.input === "true" ? true : false;
-//   $("input").prop("checked", test || false);
-// });
-
-// $("input").on("change", function () {
-//   localStorage.input = $(this).is(":checked");
-//   console.log($(this).is(":checked"));
-// });
