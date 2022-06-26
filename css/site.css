@@ -132,7 +132,7 @@ form > hr {
   justify-content: center;
 } */
 
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   height: 8px;
   width: 8px;
   cursor: pointer;
@@ -147,7 +147,6 @@ input[type="checkbox"] {
 input[type="checkbox"]:before {
   position: absolute;
   content: "";
-  /* background-color: white; */
   background-color: lightgray;
   height: 60%;
   width: 100%;
@@ -158,7 +157,6 @@ input[type="checkbox"]:before {
 input[type="checkbox"]:after {
   position: absolute;
   content: "";
-  /* background-color: white; */
   background-color: lightgray;
   height: 60%;
   width: 100%;
@@ -172,4 +170,4 @@ input[type="checkbox"]:checked,
 input:checked[type="checkbox"]:before,
 input:checked[type="checkbox"]:after {
   background-color: #fe0f42;
-}
+} */
