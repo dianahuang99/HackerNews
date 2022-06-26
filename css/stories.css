@@ -7,7 +7,7 @@
 .stories-list > li {
   color: gray;
   font-size: 0.8rem;
-  margin: 20px 0;
+  margin: 10px 0px 20px;
 }
 
 #stories-loading-msg {
