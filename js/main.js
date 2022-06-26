@@ -54,6 +54,9 @@ async function start() {
   // if we got a logged-in user
   if (currentUser) updateUIOnUserLogin();
 
+  if (currentUser) {
+    $navBar.show();
+  }
   favCheck();
 }
 
