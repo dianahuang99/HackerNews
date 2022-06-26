@@ -3,8 +3,6 @@
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 
-let favListArray = [];
-
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
@@ -116,15 +114,17 @@ function stayCheckedIfFav() {
 }
 
 function favCheck() {
+  let favListArray = [];
   if (currentUser.favorites.length === 0) {
     favListArray = [];
     $favStoriesList.empty();
     $favStoriesList.append($noFavoritesMsg);
     // $noFavoritesMsg.hide();
-  }
-  for (let story of currentUser.favorites) {
-    if (!favListArray.includes(story.storyId)) {
-      favListArray.push(story.storyId);
+  } else if (currentUser.favorites.length !== 0) {
+    for (let story of currentUser.favorites) {
+      if (!favListArray.includes(story.storyId)) {
+        favListArray.push(story.storyId);
+      }
     }
   }
 
