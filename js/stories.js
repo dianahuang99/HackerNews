@@ -75,17 +75,25 @@ $submitForm.on("submit", submitAndAddStory);
 $("body").on("click", ":checkbox", function (evt) {
   if (this.checked) {
     currentUser.addToFavorites(currentUser, evt.target.parentElement.id);
-    console.log(evt.target.parentElement);
+    // console.log(evt.target.parentElement);
   } else {
-    console.log(evt.target.parentElement.id);
+    // console.log(evt.target.parentElement.id);
     currentUser.deleteFavorites(currentUser, evt.target.parentElement.id);
-    evt.target.parentElement.remove();
-    if ($favStoriesList.children("li").length === 0) {
-      $favStoriesList.append($noFavoritesMsg);
-    }
   }
 });
 
+//remove favorites on click
+$("#fav-stories-list").on("click", ":checkbox", function (evt) {
+  if (!this.checked) {
+    evt.target.parentElement.remove();
+    currentUser.deleteFavorites(currentUser, evt.target.parentElement.id);
+  }
+  if ($favStoriesList.children("li").length === 0) {
+    $favStoriesList.append($noFavoritesMsg);
+  }
+});
+
+//remove my stories on click
 $("body").on("click", ".delete-button", async function (evt) {
   await currentUser.deleteOwnStories(currentUser, evt.target.parentElement.id);
   evt.target.parentElement.remove();

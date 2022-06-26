@@ -121,5 +121,6 @@ form > hr {
 
 .delete-button {
   border-style: dotted;
-  border-radius: 20%;
+  border-radius: 40%;
+  border-color: red;
 }
