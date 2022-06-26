@@ -2,7 +2,8 @@
 
 // This is the global list of the stories, an instance of StoryList
 let storyList;
-let favList;
+
+let favListArray = [];
 
 /** Get and show stories when site first loads. */
 
@@ -96,6 +97,7 @@ $("body").on("click", ":checkbox", function (evt) {
 //puts fav stories in html
 function putFavStoriesOnPage() {
   console.debug("putStoriesOnPage");
+  favCheck();
 
   if (currentUser.favorites.length !== 0) {
     $favStoriesList.empty();
@@ -114,10 +116,16 @@ function stayCheckedIfFav() {
 }
 
 function favCheck() {
-  const favListArray = [];
-  undefined;
+  if (currentUser.favorites.length === 0) {
+    favListArray = [];
+    $favStoriesList.empty();
+    $favStoriesList.append($noFavoritesMsg);
+    // $noFavoritesMsg.hide();
+  }
   for (let story of currentUser.favorites) {
-    favListArray.push(story.storyId);
+    if (!favListArray.includes(story.storyId)) {
+      favListArray.push(story.storyId);
+    }
   }
 
   const ul = $("li");

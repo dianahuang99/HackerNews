@@ -54,6 +54,7 @@ async function navFavoritesClick(evt) {
   // if (currentUser.favorites.length == 0) {
   //   $noFavoritesMsg.show();
   // }
+
   putFavStoriesOnPage();
   stayCheckedIfFav();
 }
