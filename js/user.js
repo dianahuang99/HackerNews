@@ -27,6 +27,7 @@ async function login(evt) {
   updateUIOnUserLogin();
   $loginForm.hide();
   $signupForm.hide();
+  $navBar.show();
 }
 
 $loginForm.on("submit", login);
@@ -49,6 +50,9 @@ async function signup(evt) {
   updateUIOnUserLogin();
 
   $signupForm.trigger("reset");
+  $loginForm.hide();
+  $signupForm.hide();
+  $navBar.show();
 }
 
 $signupForm.on("submit", signup);
