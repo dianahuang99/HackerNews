@@ -137,7 +137,7 @@ input[type="checkbox"] {
   width: 8px;
   cursor: pointer;
   /* background-color: white; */
-  /* position: relative; */
+  position: relative;
   background-color: lightgray;
   transform: rotate(45deg);
   -webkit-appearance: none;
