@@ -39,6 +39,7 @@ function navSubmitClick(evt) {
   console.debug("navSubmitClick", evt);
   $submitForm.show();
   $favStoriesList.hide();
+  $ownStoriesList.hide();
   start();
 }
 
@@ -59,3 +60,21 @@ async function navFavoritesClick(evt) {
 }
 
 $navFavorites.on("click", navFavoritesClick);
+
+async function navMyStoriesClick(evt) {
+  console.debug("navFavoritesClick", evt);
+  await checkForRememberedUser();
+  hidePageComponents();
+  $ownStoriesList.show();
+  $noOwnStoriesMsg.show();
+  // if (currentUser.favorites.length == 0) {
+  //   $noFavoritesMsg.show();
+  // }
+  putOwnStoriesOnPage();
+  favCheck();
+  $("li").prepend("<button class='delete-button'>	&#10060;</button>");
+  // putFavStoriesOnPage();
+  // stayCheckedIfFav();
+}
+
+$navMyStories.on("click", navMyStoriesClick);

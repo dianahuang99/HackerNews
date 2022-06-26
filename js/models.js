@@ -213,4 +213,13 @@ class User {
       { params: { token } }
     );
   }
+
+  /** deletes stories from my own story list */
+  async deleteOwnStories(currentUser, storyId) {
+    const token = currentUser.loginToken;
+    const res = await axios.delete(
+      `https://hack-or-snooze-v3.herokuapp.com/stories/${storyId}`,
+      { params: { token } }
+    );
+  }
 }

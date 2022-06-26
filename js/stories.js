@@ -72,24 +72,27 @@ async function submitAndAddStory(evt) {
 
 $submitForm.on("submit", submitAndAddStory);
 
-//ask when to use change and when to use click
-// $(":checkbox").on("change", function (evt) {
-//   if (evt.target.checked) {
-//     // addToFavorites(currentUser, evt.target.parentElement.id);
-//     console.log("checked");
-//     console.log(this);
-//     console.log(evt.target);
-//   } else {
-//     console.log("unchecked");
-//   }
-// });
-
 $("body").on("click", ":checkbox", function (evt) {
   if (this.checked) {
     currentUser.addToFavorites(currentUser, evt.target.parentElement.id);
+    console.log(evt.target.parentElement);
   } else {
     console.log(evt.target.parentElement.id);
     currentUser.deleteFavorites(currentUser, evt.target.parentElement.id);
+    evt.target.parentElement.remove();
+    if ($favStoriesList.children("li").length === 0) {
+      $favStoriesList.append($noFavoritesMsg);
+    }
+  }
+});
+
+$("body").on("click", ".delete-button", async function (evt) {
+  await currentUser.deleteOwnStories(currentUser, evt.target.parentElement.id);
+  evt.target.parentElement.remove();
+
+  /**shows no stories if all deleted */
+  if ($ownStoriesList.children("li").length === 0) {
+    $ownStoriesList.append($noOwnStoriesMsg);
   }
 });
 
@@ -134,5 +137,44 @@ function favCheck() {
     if (favListArray.includes(li.id)) {
       li.children[0].checked = true;
     }
+  }
+}
+
+function ownStoryCheck() {
+  let ownStoryArray = [];
+  if (currentUser.ownStories.length === 0) {
+    ownStoryArray = [];
+    $ownStoriesList.empty();
+    $ownStoriesList.append($noOwnStoriesMsg);
+    // $noFavoritesMsg.hide();
+  } else if (currentUser.ownStories.length !== 0) {
+    for (let story of currentUser.ownStories) {
+      if (!ownStoryArray.includes(story.storyId)) {
+        ownStoryArray.push(story.storyId);
+      }
+    }
+  }
+
+  // const ul = $("li");
+  // for (let li of ul) {
+  //   if (ownStoryArray.includes(li.id)) {
+  //     $("li").prepend("<button>Hello</button>");
+  //   }
+  // }
+}
+
+function putOwnStoriesOnPage() {
+  console.debug("putOwnOnPage");
+  ownStoryCheck();
+
+  if (currentUser.ownStories.length !== 0) {
+    $ownStoriesList.empty();
+
+    // loop through all of our stories and generate HTML for them
+    for (let story of currentUser.ownStories) {
+      const $story = generateStoryMarkup(story);
+      $ownStoriesList.append($story);
+    }
+    $ownStoriesList.show();
   }
 }
