@@ -136,9 +136,9 @@ input[type="checkbox"] {
   height: 8px;
   width: 8px;
   cursor: pointer;
-  background-color: white;
+  outline: none;
   position: relative;
-  /* background-color: lightgray; */
+  background-color: lightgray;
   transform: rotate(45deg);
   -webkit-appearance: none;
 }
@@ -146,8 +146,8 @@ input[type="checkbox"] {
 input[type="checkbox"]:before {
   position: absolute;
   content: "";
-  background-color: white;
-  /* background-color: lightgray; */
+  /* background-color: white; */
+  background-color: lightgray;
   height: 60%;
   width: 100%;
   top: -59%;
@@ -157,8 +157,8 @@ input[type="checkbox"]:before {
 input[type="checkbox"]:after {
   position: absolute;
   content: "";
-  background-color: white;
-  /* background-color: lightgray; */
+  /* background-color: white; */
+  background-color: lightgray;
   height: 60%;
   width: 100%;
   transform: rotate(-90deg);
